@@ -148,9 +148,6 @@
         .left,.right{
             width: 100%;
         }
-        h1{
-            /* height: 13%; */
-        }
         #display,textarea{
             font-size: 22px;
         }
@@ -185,12 +182,14 @@
 
 <script>
     let a=1;
+    let ad=0, rp=0; 
     let input=document.querySelector('#input');
     let display=document.querySelector('#display');
     const newol=document.createElement('ol');
 
                         // add to list
 document.querySelector('#add').addEventListener("click",function(){
+    rp=1; ad=1;
     if(input.value==""){
         alert("Please write something");
    }
@@ -241,24 +240,33 @@ document.querySelector('#add').addEventListener("click",function(){
             })
 
                         // edit
+
         newButton1.addEventListener("click",function(){
+            if(ad==0&&rp==0){
+                alert("dd");
+            }
+            else{
             input.value=document.querySelector("#"+p).innerText;
             const forbtn=document.createElement('div');
             forbtn.setAttribute("id","forbtn");
             const addbtn= document.createElement('button');
+            addbtn.setAttribute("id","btn");
             addbtn.textContent="Replace to";
             forbtn.appendChild(addbtn);
             document.querySelector('#input1').appendChild(forbtn);
-
+            rp=0; ad=0;
             
                     // replace TO
                 addbtn.addEventListener("click",function(){
                 document.querySelector("#"+p).innerText=input.value;
                 input.value=null;
                 addbtn.remove();
+                rp=1; ad=1;
             })
+            }
+
         })
-        forbtn.remove();
+        document.querySelector('#btn').remove();
     }
 })
 
