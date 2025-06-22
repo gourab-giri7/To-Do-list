@@ -34,7 +34,7 @@
             gap: 5px;
         }
         h1{
-            height: 15%;
+            /* height: 15%; */
             background-color: #0072d6;
             width: 100%;
             text-align: center;
@@ -42,7 +42,6 @@
             color: white;
             padding: 10px;
             font-size: 20px;
-
         }
         #display,.input{
             height: 70%;
@@ -80,6 +79,7 @@
             display: flex;
             align-items: center;
             padding-right: 15px;
+            /* overflow: ;  */
         }
         #forbtn button{
             background-color: #2222ff;
@@ -148,6 +148,12 @@
         .left,.right{
             width: 100%;
         }
+        h1{
+            /* height: 13%; */
+        }
+        #display,textarea{
+            font-size: 22px;
+        }
         #forbtn{
             width: 20%;
         }
@@ -169,9 +175,9 @@
 
         <div class="right">
             <h1>Write your notes</h1>
-            <div class="input">
+            <div class="input" id="input1">
                 <textarea id="input" placeholder="Write here your notes"></textarea>
-                <div id="forbtn"></div>
+                <!-- <div id="forbtn"></div> -->
             </div>
             <button id="add">Add to list</button>
         </div>
@@ -214,7 +220,7 @@ document.querySelector('#add').addEventListener("click",function(){
         newP.textContent=input.value;
         // Div
         newDiv.style.cssText=
-        "background-color:red; display:flex; flex-direction:row; gap:5px; width:100%; flex-wrap:wrap; margin-bottom:5px"
+        "display:flex; flex-direction:row; gap:5px; width:100%; flex-wrap:wrap; margin-bottom:5px"
         // P
         // newP.style.cssText=" "
         // edit
@@ -228,26 +234,31 @@ document.querySelector('#add').addEventListener("click",function(){
         display.appendChild(newol);
         input.value=null;
 
+
+                                        // delete
+        document.querySelector("#"+del).addEventListener("click",function(){
+                document.querySelector('#'+Li).remove();
+            })
+
                         // edit
-        document.querySelector("#"+e).addEventListener("click",function(){
+        newButton1.addEventListener("click",function(){
             input.value=document.querySelector("#"+p).innerText;
-            let addbtn= document.createElement('button');
+            const forbtn=document.createElement('div');
+            forbtn.setAttribute("id","forbtn");
+            const addbtn= document.createElement('button');
             addbtn.textContent="Replace to";
+            forbtn.appendChild(addbtn);
+            document.querySelector('#input1').appendChild(forbtn);
+
             
-                    // ADDD TO
-            document.querySelector('#forbtn').appendChild(addbtn);
+                    // replace TO
                 addbtn.addEventListener("click",function(){
                 document.querySelector("#"+p).innerText=input.value;
                 input.value=null;
                 addbtn.remove();
             })
         })
-
-
-                                    // delete
-            document.querySelector("#"+del).addEventListener("click",function(){
-                document.querySelector('#'+Li).remove();
-            })
+        forbtn.remove();
     }
 })
 
